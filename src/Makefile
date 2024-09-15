@@ -12,17 +12,15 @@ LIBFT := libs/libft/libft.a
 
 LIBFT_DIR := libs/libft
 
-SRCS := src/push_swap.c
+SRCS := src/push_swap.c\
+	src/op.c\
 
 # SRCS_BONUS := 
 
 $(NAME): $(LIBFT) $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
 
-all: $(NAME) bonus
-
-$(MLIBX):
-	make -C $(MLIBX_DIR)
+all: $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
