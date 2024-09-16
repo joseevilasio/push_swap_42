@@ -15,6 +15,7 @@ LIBFT_DIR := libs/libft
 SRCS := src/op.c\
 	src/push_swap.c\
 	src/utils.c\
+	src/free_error_handler.c\
 
 # SRCS_BONUS := 
 
