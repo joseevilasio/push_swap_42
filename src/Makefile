@@ -12,8 +12,9 @@ LIBFT := libs/libft/libft.a
 
 LIBFT_DIR := libs/libft
 
-SRCS := src/push_swap.c\
-	src/op.c\
+SRCS := src/op.c\
+	src/push_swap.c\
+	src/utils.c\
 
 # SRCS_BONUS := 
 
