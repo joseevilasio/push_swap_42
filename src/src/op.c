@@ -48,3 +48,26 @@ pb (push b): Remove o primeiro elemento do topo da pilha a e o coloca no
 topo da pilha b. Se a pilha a estiver vazia, nada acontece.
 */
 
+/*
+ra (rotate a): Move todos os elementos da pilha a para cima em uma posição. 
+O primeiro elemento se torna o último.
+
+rb (rotate b): Move todos os elementos da pilha b para cima em uma posição. 
+O primeiro elemento se torna o último.
+
+rr: Executa as operações ra e rb ao mesmo tempo, ou seja, move os elementos 
+das pilhas a e b para cima em uma posição simultaneamente.
+O primeiro elemento de cada pilha se torna o último.
+*/
+
+/*
+rra (reverse rotate a): Move todos os elementos da pilha a para baixo em 
+uma posição. O último elemento se torna o primeiro.
+
+rrb (reverse rotate b): Move todos os elementos da pilha b para baixo em
+uma posição. O último elemento se torna o primeiro.
+
+rrr: Executa as operações rra e rrb ao mesmo tempo, ou seja, move os
+elementos das pilhas a e b para baixo em uma posição simultaneamente. 
+O último elemento de cada pilha se torna o primeiro.
+*/
