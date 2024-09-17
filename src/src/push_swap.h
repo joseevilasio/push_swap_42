@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/16 23:07:05 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:04:47 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@
 # include <stdio.h>
 
 # define SUCCESS 0
-/* Internal process failure range 100 | perror() */
+/* Internal process failure range 100 */
 # define ERROR_MALLOC 101
 /* External process failure range 200 | ft_printf() */
 # define ERROR_INTEGER 201
 # define ERROR_MAXINT 202
 # define ERROR_DUPLICATED 203
+/* External process failure range 300 | without ft_printf() */
+# define ERROR_SORTED 301
+# define ERROR_ARGS 302
 
 /* Operations */
 void	swap(int *stack_a, int *stack_b, char task, int len_a, int len_b);

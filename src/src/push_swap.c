@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/16 23:11:58 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:05:34 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	main(int argc, char **argv)
 	int	*numbers;
 
 	if (argc <= 2)
-		return (1);
+		ft_error_handler(ERROR_ARGS, NULL);
 	numbers = get_numbers(argv, argc - 1);
 	if (is_sorted(numbers, argc - 1))
-		ft_error_handler(0, numbers);
+		ft_error_handler(ERROR_SORTED, numbers);
 	while (i < argc - 1)
 	{
 		ft_printf("%d\n", numbers[i]);
@@ -69,12 +69,13 @@ int	main(int argc, char **argv)
 	}
 	ft_printf("running... "); */
 	ft_printf("running... ");
+	free(numbers);
 	return (0);
 }
 
 /* 
 
 #TODO
-> Consertar is_sorted
+> 
 
  */

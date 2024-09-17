@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/16 23:09:34 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:58:31 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int	is_sorted(int *numbers, int size)
 		j = i + 1;
 		while (j < size)
 		{
-			if (ref < numbers[j])
-				return (-1);
+			if (ref > numbers[j])
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }
