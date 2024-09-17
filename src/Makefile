@@ -12,10 +12,10 @@ LIBFT := libs/libft/libft.a
 
 LIBFT_DIR := libs/libft
 
-SRCS := src/op.c\
-	src/push_swap.c\
+SRCS := src/push_swap.c\
 	src/utils.c\
 	src/free_error_handler.c\
+	src/main.c\
 
 # SRCS_BONUS := 
 
@@ -25,7 +25,7 @@ $(NAME): $(LIBFT) $(SRCS)
 all: $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make bonus -C $(LIBFT_DIR)
 
 bonus: $(NAME_BONUS)
 

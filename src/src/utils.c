@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 11:58:31 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:51:54 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,40 @@ int	is_sorted(int *numbers, int size)
 		i++;
 	}
 	return (-1);
+}
+
+t_list	*build_stack(int *numbers, int size)
+{
+	t_list	*stack_a;
+	int		i;
+	int		*num_ptr;
+
+	i = 0;
+	stack_a = NULL;
+	while (i < size)
+	{
+		num_ptr = malloc(sizeof(int));
+		if (!num_ptr)
+		{
+			ft_lstclear(&stack_a, free);
+			ft_error_handler(ERROR_MALLOC, numbers);
+		}
+		*num_ptr = numbers[i];
+		ft_lstadd_back(&stack_a, ft_lstnew(num_ptr));
+		i++;
+	}
+	return (stack_a);
+}
+
+void	print_stack(t_list *stack, char c)
+{
+	int	*num_ptr;
+
+	ft_printf(" -- Stack %c -- \n", c);
+	while (stack != NULL)
+	{
+		*num_ptr = (int *) stack->content;
+		ft_printf("%d\n", *num_ptr);
+		stack = stack->next;
+	}
 }

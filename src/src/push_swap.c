@@ -6,76 +6,100 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 12:05:34 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:49:19 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*get_numbers(char **argv, int size)
+void	swap(t_list **stack_a, t_list **stack_b, char task)
 {
-	int		i;
-	int		j;
-	long	number;
-	int		*numbers;
+	t_list	*first;
+	t_list	*second;
 
-	i = 1;
-	j = 0;
-	numbers = (int *) malloc(size * sizeof(int));
-	if (!numbers)
-		ft_error_handler(ERROR_MALLOC, numbers);
-	while (i <= size)
+	if (ft_lstsize(*stack_a) > 1)
 	{
-		if (is_integer(argv[i]) == -1)
-			ft_error_handler(ERROR_INTEGER, numbers);
-		number = ft_atol(argv[i]);
-		if (number < INT_MIN || number > INT_MAX) //rever
-			ft_error_handler(ERROR_MAXINT, numbers);
-		numbers[j] = (int) number;
-		i++;
-		j++;
+		first = *stack_a;
+		second = first->next;
+		first->next = second->next;
+		second->next = first;
+		*stack_a = second;
+		if (task)
+			ft_printf("s%c\n", task);
 	}
-	if (is_duplicated(numbers, size) == -1)
-		ft_error_handler(ERROR_DUPLICATED, numbers);
-	return (numbers);
+	if (stack_b && ft_lstsize(*stack_b) > 1)
+		swap(stack_b, NULL, 0);
 }
 
-int	main(int argc, char **argv)
+void	push(t_list **stack_a, t_list **stack_b, char task)
 {
-	/* 	int numeros_a[] = {2, 1, 3, 6, 3, 8};
-	int numeros_b[] = {9, 4, 5};
-	int	len_a = sizeof(numeros_a) / sizeof(numeros_a[0]); //modificar
-	int	len_b = sizeof(numeros_b) / sizeof(numeros_b[0]); //modificar */
-	int i = 0;
-	int	*numbers;
+	t_list	*head;
 
-	if (argc <= 2)
-		ft_error_handler(ERROR_ARGS, NULL);
-	numbers = get_numbers(argv, argc - 1);
-	if (is_sorted(numbers, argc - 1))
-		ft_error_handler(ERROR_SORTED, numbers);
-	while (i < argc - 1)
+	if (task == 'a' && stack_b && *stack_b && ft_lstsize(*stack_b) > 0)
 	{
-		ft_printf("%d\n", numbers[i]);
-		i++;
+		head = *stack_b;
+		*stack_b = (*stack_b)->next;
+		head->next = NULL;
+		ft_lstadd_front(stack_a, head);
+		ft_printf("p%c\n", task);
 	}
-/* 	//swap(numeros_a, numeros_b, 's', len_a, len_b);
-	i = 0;
-	ft_printf(" -- stack b -- \n");
-	while (i < len_b)
+	if (task == 'b' && stack_a && *stack_a && ft_lstsize(*stack_a) > 0)
 	{
-		ft_printf("%d\n", numeros_b[i]);
-		i++;
+		head = *stack_a;
+		*stack_a = (*stack_a)->next;
+		head->next = NULL;
+		ft_lstadd_front(stack_b, head);
+		ft_printf("p%c\n", task);
 	}
-	ft_printf("running... "); */
-	ft_printf("running... ");
-	free(numbers);
-	return (0);
 }
 
-/* 
+void	rotate(t_list **stack_a, t_list **stack_b, char task)
+{
+	t_list	*head;
 
-#TODO
-> 
+	if ((task == 'a' || task == 'r') && stack_a && *stack_a
+		&& ft_lstsize(*stack_a) > 0)
+	{
+		head = *stack_a;
+		*stack_a = (*stack_a)->next;
+		head->next = NULL;
+		ft_lstadd_back(stack_a, head);
+	}
+	if ((task == 'b' || task == 'r') && stack_b && *stack_b
+		&& ft_lstsize(*stack_b) > 0)
+	{
+		head = *stack_b;
+		*stack_b = (*stack_b)->next;
+		head->next = NULL;
+		ft_lstadd_back(stack_b, head);
+	}
+	ft_printf("rr%c\n", task);
+}
 
- */
+void	rrotate(t_list **stack_a, t_list **stack_b, char task)
+{
+	t_list	*tail;
+	t_list	*btail;
+
+	if ((task == 'a' || task == 'r') && stack_a && *stack_a
+		&& ft_lstsize(*stack_a) > 0)
+	{
+		btail = *stack_a;
+		while (btail->next->next)
+			btail = btail->next;
+		tail = btail->next;
+		btail->next = NULL;
+		ft_lstadd_front(stack_a, tail);
+	}
+	if ((task == 'b' || task == 'r') && stack_b && *stack_b
+		&& ft_lstsize(*stack_b) > 0)
+	{
+		btail = *stack_b;
+		while (btail->next->next)
+			btail = btail->next;
+		tail = btail->next;
+		btail->next = NULL;
+		ft_lstadd_front(stack_b, tail);
+	}
+	ft_printf("rr%c\n", task);
+}
