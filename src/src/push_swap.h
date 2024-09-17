@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 18:51:36 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:49:19 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ t_list	*build_stack(int *numbers, int size);
 void	print_stack(t_list *stack, char c);
 
 void	ft_error_handler(int signal, int *numbers);
+
+void	radix(t_list **stack_a, t_list **stack_b);
 
 #endif //PUSH_SWAP_H

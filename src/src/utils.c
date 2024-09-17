@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 18:51:54 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:21:05 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,14 @@ t_list	*build_stack(int *numbers, int size)
 	stack_a = NULL;
 	while (i < size)
 	{
-		num_ptr = malloc(sizeof(int));
+		num_ptr = malloc(2 * sizeof(int));
 		if (!num_ptr)
 		{
 			ft_lstclear(&stack_a, free);
 			ft_error_handler(ERROR_MALLOC, numbers);
 		}
-		*num_ptr = numbers[i];
+		num_ptr[0] = numbers[i];
+		num_ptr[1] = i;
 		ft_lstadd_back(&stack_a, ft_lstnew(num_ptr));
 		i++;
 	}
@@ -128,8 +129,8 @@ void	print_stack(t_list *stack, char c)
 	ft_printf(" -- Stack %c -- \n", c);
 	while (stack != NULL)
 	{
-		*num_ptr = (int *) stack->content;
-		ft_printf("%d\n", *num_ptr);
+		num_ptr = (int *) stack->content;
+		ft_printf("[%d] -> %d\n", num_ptr[1], num_ptr[0]);
 		stack = stack->next;
 	}
 }

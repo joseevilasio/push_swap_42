@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 18:49:19 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:59:36 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	rotate(t_list **stack_a, t_list **stack_b, char task)
 		head->next = NULL;
 		ft_lstadd_back(stack_b, head);
 	}
-	ft_printf("rr%c\n", task);
+	ft_printf("r%c\n", task);
 }
 
 void	rrotate(t_list **stack_a, t_list **stack_b, char task)
