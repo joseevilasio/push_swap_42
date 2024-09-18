@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 20:21:05 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:14:21 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,29 @@ t_list	*build_stack(int *numbers, int size)
 	stack_a = NULL;
 	while (i < size)
 	{
+		num_ptr = malloc(sizeof(int));
+		if (!num_ptr)
+		{
+			ft_lstclear(&stack_a, free);
+			ft_error_handler(ERROR_MALLOC, numbers);
+		}
+		*num_ptr = numbers[i];
+		ft_lstadd_back(&stack_a, ft_lstnew(num_ptr));
+		i++;
+	}
+	return (stack_a);
+}
+
+/* t_list	*build_stack(int *numbers, int size)
+{
+	t_list	*stack_a;
+	int		i;
+	int		*num_ptr;
+
+	i = 0;
+	stack_a = NULL;
+	while (i < size)
+	{
 		num_ptr = malloc(2 * sizeof(int));
 		if (!num_ptr)
 		{
@@ -120,9 +143,22 @@ t_list	*build_stack(int *numbers, int size)
 		i++;
 	}
 	return (stack_a);
-}
+} */
 
 void	print_stack(t_list *stack, char c)
+{
+	// int	*num_ptr;
+
+	ft_printf(" -- Stack %c -- \n", c);
+	while (stack != NULL)
+	{
+		// num_ptr = (int *) stack->content;
+		ft_printf("%d\n", *((int *) stack->content));
+		 
+	}
+}
+
+/* void	print_stack(t_list *stack, char c)
 {
 	int	*num_ptr;
 
@@ -133,4 +169,4 @@ void	print_stack(t_list *stack, char c)
 		ft_printf("[%d] -> %d\n", num_ptr[1], num_ptr[0]);
 		stack = stack->next;
 	}
-}
+} */

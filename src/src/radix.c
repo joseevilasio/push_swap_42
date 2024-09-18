@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:41:35 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 21:06:49 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:01:28 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,95 @@ void	radix(t_list **stack_a, t_list **stack_b)
 		i++;
 	}
 }
+
+void	quicksort_pilhas(t_list **stack_a, t_list **stack_b)
+{
+
+    int pivot;
+    int count = 0;
+	int	size;
+
+	int	*num_ptr;
+	num_ptr = (int *) (*stack_a)->content;
+
+	size = ft_lstsize(*stack_a);
+
+    if (size <= 1)
+        return;
+
+    // Pegando o último elemento como pivô (você pode mudar a estratégia de seleção do pivô)
+    pivot = *num_ptr;
+
+    // Particionamento: movendo os elementos menores para stack_b
+    while (size-- > 0) {
+		num_ptr = (int *) (*stack_a)->content;
+        int current_value = *num_ptr;
+        
+        if (current_value <= pivot) {
+            // Move para o final da pilha A (ra)
+            rotate(stack_a, NULL, 'a');
+        } else {
+            // Move o elemento para a pilha B (pb)
+            push(stack_a, stack_b, 'b');
+            count++;
+        }
+    }
+
+    // Chamada recursiva para as duas partições (elementos menores e maiores que o pivô)
+    quicksort_pilhas(stack_a, stack_b);  // Ordena os elementos menores
+    quicksort_pilhas(stack_b, stack_a);  // Ordena os elementos maiores
+
+    // Move os elementos de volta da pilha B para a pilha A
+    while (count-- > 0) {
+        push(stack_a, stack_b, 'a');
+    }
+}
+
+/* void	small(t_list **stack_a, t_list **stack_b)
+{
+	int	pivot_a;
+	t_list *current;
+	// int	pivot_b;
+	// int i = 0;
+
+	pivot_a = *((int *) (*stack_a)->content);
+	// int size_a = ft_lstsize(*stack_a);
+	rotate(stack_a, stack_b, 'a');
+	current = *stack_a;
+	// pivot_b = *((int *) (*stack_b)->content);
+	while (current)
+	{
+		ft_printf(" %d > %d\n", *((int *) current->content), pivot_a);
+		if (*((int *) current->content) > pivot_a)
+		{
+			
+			push(stack_a, stack_b, 'b');
+		}
+		// else
+		// 	rotate(stack_a, stack_b, 'a');
+		current = *stack_a;
+	}	
+} */
+
+/* void	smallsmall(t_list **stack_a, t_list **stack_b)
+{
+	int	pivot_a;
+	t_list *current;
+	// int	pivot_b;
+	int i = 0;
+
+	pivot_a = *((int *) (*stack_a)->content);
+	int size_a = ft_lstsize(*stack_a);
+	current = *stack_a;
+	// rotate(stack_a, stack_b, 'a');
+	// pivot_b = *((int *) (*stack_b)->content);
+	while (i < size_a)
+	{
+		if (*((int *) current->content) > pivot_a)
+			push(stack_a, stack_b, 'b');
+		else
+			rotate(stack_a, stack_b, 'a');
+		i++;
+	}	
+} */
+

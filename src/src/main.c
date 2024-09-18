@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/17 21:16:21 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:10:44 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static int	*get_numbers(char **argv, int size)
 	return (numbers);
 }
 
+static	void	manage_sort(t_list **stack_a, t_list **stack_b)
+{
+	int	size;
+
+	size = ft_lstsize(*stack_a);
+	if (size == 2)
+		swap(stack_a, stack_b, 'a');
+	if (size == 3)
+		smallsmall(stack_a, stack_b);
+}
+
 int	main(int argc, char **argv)
 {
 	int		*numbers;
@@ -48,6 +59,9 @@ int	main(int argc, char **argv)
 
 	if (argc <= 2)
 		ft_error_handler(ERROR_ARGS, NULL);
+	// if (argc == 2)
+	// 	argv = ft_split(argv[1], ' ');
+	// ft_printf("%s", argv[0]);
 	numbers = get_numbers(argv, argc - 1);
 	if (is_sorted(numbers, argc - 1))
 		ft_error_handler(ERROR_SORTED, numbers);
@@ -55,11 +69,13 @@ int	main(int argc, char **argv)
 	if (!stack_b)
 		ft_error_handler(ERROR_MALLOC, numbers);
 	stack_b = NULL;
-	stack_a = build_stack(numbers, argc - 1);	
-	print_stack(stack_a, 'A');
-	radix(&stack_a, &stack_b);
-	print_stack(stack_a, 'A');
+	stack_a = build_stack(numbers, argc - 1);
 	free(numbers);
+	print_stack(stack_a, 'A');
+	print_stack(stack_b, 'B');
+	manage_sort(&stack_a, &stack_b);
+	print_stack(stack_a, 'A');
+	print_stack(stack_b, 'B');
 	ft_lstclear(&stack_a, free);
 	ft_lstclear(&stack_b, free);
 	return (0);
