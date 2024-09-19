@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:41:35 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/18 23:01:28 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:24:12 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,25 +134,29 @@ void	quicksort_pilhas(t_list **stack_a, t_list **stack_b)
 	}	
 } */
 
-/* void	smallsmall(t_list **stack_a, t_list **stack_b)
+void	smallsmall(t_list **stack_a, t_list **stack_b)
 {
-	int	pivot_a;
 	t_list *current;
-	// int	pivot_b;
-	int i = 0;
+	int	a;
+	int	b;
+	int	c;
 
-	pivot_a = *((int *) (*stack_a)->content);
-	int size_a = ft_lstsize(*stack_a);
+	push(stack_a, stack_b, 'b');
 	current = *stack_a;
-	// rotate(stack_a, stack_b, 'a');
-	// pivot_b = *((int *) (*stack_b)->content);
-	while (i < size_a)
-	{
-		if (*((int *) current->content) > pivot_a)
-			push(stack_a, stack_b, 'b');
-		else
-			rotate(stack_a, stack_b, 'a');
-		i++;
-	}	
-} */
+	a = *((int *) current->content);
+	b = *((int *) current->next->content);
+	if (a > b)
+		swap(stack_a, stack_b, 'a');
+	push(stack_a, stack_b, 'a');
+	current = *stack_a;
+	a = *((int *) current->content);
+	b = *((int *) current->next->content);
+	c = *((int *) ft_lstlast(*stack_a));
+	if (a < b)
+		return;
+	if (a > b && a > c)
+		rotate(stack_a, stack_b, 'a');
+	else
+		swap(stack_a, stack_b, 'a');
+}
 

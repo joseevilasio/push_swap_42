@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/18 22:31:52 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:24:40 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void	ft_free_argv(char **argv);
 
 void	radix(t_list **stack_a, t_list **stack_b);
 void	quicksort_pilhas(t_list **stack_a, t_list **stack_b);
-void	small(t_list **stack_a, t_list **stack_b);
+void	smallsmall(t_list **stack_a, t_list **stack_b);
 
 #endif //PUSH_SWAP_H
