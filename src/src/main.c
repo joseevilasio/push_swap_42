@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/18 23:10:44 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:45:06 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ static	void	manage_sort(t_list **stack_a, t_list **stack_b)
 	size = ft_lstsize(*stack_a);
 	if (size == 2)
 		swap(stack_a, stack_b, 'a');
-	if (size == 3)
-		smallsmall(stack_a, stack_b);
+	else if (size == 3)
+		smallsmall(stack_a);
+	else
+	 	quicksort_pilhas(stack_a, stack_b, size);
 }
 
 int	main(int argc, char **argv)

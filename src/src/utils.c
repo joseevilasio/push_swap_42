@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/18 23:14:21 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:49:51 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,14 +147,11 @@ t_list	*build_stack(int *numbers, int size)
 
 void	print_stack(t_list *stack, char c)
 {
-	// int	*num_ptr;
-
 	ft_printf(" -- Stack %c -- \n", c);
 	while (stack != NULL)
 	{
-		// num_ptr = (int *) stack->content;
 		ft_printf("%d\n", *((int *) stack->content));
-		 
+		stack = stack->next;
 	}
 }
 
