@@ -6,18 +6,18 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/22 18:10:46 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:36:47 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_list **stack_a, t_list **stack_b, char task)
+void	swap(t_stack **stack_a, t_stack **stack_b, char task)
 {
-	t_list	*first;
-	t_list	*second;
+	t_stack	*first;
+	t_stack	*second;
 
-	if (ft_lstsize(*stack_a) > 1 && (task == 'a' || task == 's'))
+	if (ft_stacksize(*stack_a) > 1 && (task == 'a' || task == 's'))
 	{
 		first = *stack_a;
 		second = first->next;
@@ -25,7 +25,7 @@ void	swap(t_list **stack_a, t_list **stack_b, char task)
 		second->next = first;
 		*stack_a = second;
 	}
-	if (ft_lstsize(*stack_b) > 1 && (task == 'b' || task == 's'))
+	if (ft_stacksize(*stack_b) > 1 && (task == 'b' || task == 's'))
 	{
 		first = *stack_b;
 		second = first->next;
@@ -36,75 +36,75 @@ void	swap(t_list **stack_a, t_list **stack_b, char task)
 	ft_printf("s%c\n", task);
 }
 
-void	push(t_list **stack_a, t_list **stack_b, char task)
+void	push(t_stack **stack_a, t_stack **stack_b, char task)
 {
-	t_list	*head;
+	t_stack	*head;
 
-	if (task == 'a' && stack_b && *stack_b && ft_lstsize(*stack_b) > 0)
+	if (task == 'a' && stack_b && *stack_b && ft_stacksize(*stack_b) > 0)
 	{
 		head = *stack_b;
 		*stack_b = (*stack_b)->next;
 		head->next = NULL;
-		ft_lstadd_front(stack_a, head);
+		ft_stackadd_front(stack_a, head);
 		ft_printf("p%c\n", task);
 	}
-	if (task == 'b' && stack_a && *stack_a && ft_lstsize(*stack_a) > 0)
+	if (task == 'b' && stack_a && *stack_a && ft_stacksize(*stack_a) > 0)
 	{
 		head = *stack_a;
 		*stack_a = (*stack_a)->next;
 		head->next = NULL;
-		ft_lstadd_front(stack_b, head);
+		ft_stackadd_front(stack_b, head);
 		ft_printf("p%c\n", task);
 	}
 }
 
-void	rotate(t_list **stack_a, t_list **stack_b, char task)
+void	rotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
-	t_list	*head;
+	t_stack	*head;
 
 	if ((task == 'a' || task == 'r') && stack_a && *stack_a
-		&& ft_lstsize(*stack_a) > 0 && (*stack_a)->next)
+		&& ft_stacksize(*stack_a) > 0 && (*stack_a)->next)
 	{
 		head = *stack_a;
 		*stack_a = (*stack_a)->next;
 		head->next = NULL;
-		ft_lstadd_back(stack_a, head);
+		ft_stackadd_back(stack_a, head);
 	}
 	if ((task == 'b' || task == 'r') && stack_b && *stack_b
-		&& ft_lstsize(*stack_b) > 0)
+		&& ft_stacksize(*stack_b) > 0 && (*stack_b)->next)
 	{
 		head = *stack_b;
 		*stack_b = (*stack_b)->next;
 		head->next = NULL;
-		ft_lstadd_back(stack_b, head);
+		ft_stackadd_back(stack_b, head);
 	}
 	ft_printf("r%c\n", task);
 }
 
-void	rrotate(t_list **stack_a, t_list **stack_b, char task)
+void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
-	t_list	*tail;
-	t_list	*btail;
+	t_stack	*tail;
+	t_stack	*btail;
 
 	if ((task == 'a' || task == 'r') && *stack_a
-		&& ft_lstsize(*stack_a) > 0)
+		&& ft_stacksize(*stack_a) > 0)
 	{
 		btail = *stack_a;
 		while (btail->next->next)
 			btail = btail->next;
 		tail = btail->next;
 		btail->next = NULL;
-		ft_lstadd_front(stack_a, tail);
+		ft_stackadd_front(stack_a, tail);
 	}
 	if ((task == 'b' || task == 'r') && *stack_b
-		&& ft_lstsize(*stack_b) > 0)
+		&& ft_stacksize(*stack_b) > 0)
 	{
 		btail = *stack_b;
 		while (btail->next->next)
 			btail = btail->next;
 		tail = btail->next;
 		btail->next = NULL;
-		ft_lstadd_front(stack_b, tail);
+		ft_stackadd_front(stack_b, tail);
 	}
 	ft_printf("rr%c\n", task);
 }

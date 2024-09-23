@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/22 17:57:52 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/23 22:49:01 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,116 +29,76 @@
 # define ERROR_SORTED 301
 # define ERROR_ARGS 302
 
-typedef struct s_node
+typedef struct s_stack
 {
-	int		number;
-	int		index;
-	int		cost;
-	int		above_median;
-	int		cheapest;
-	t_list	*target_node;
-}	t_node;
-
-/* typedef struct s_stack_node //A container of data enclosed in {} braces. `s_` for struct
-{
-	int					nbr; //The number to sort
-	int					index; //The number's position in the stack
-	int					push_cost; //How many commands in total
-	bool				above_median; //Used to calculate `push_cost`
-	bool				cheapest; //The node that is the cheapest to do commands
-	struct s_stack_node	*target_node; //The target node of a node in the opposite stack
-	struct s_stack_node	*next; //A pointer to the next node
-	struct s_stack_node	*prev; //A pointer to the previous node
-}	t_stack_node; //The "shortened name", "t_stack_node". `t_` for type */
+	int				number;
+	int				index;
+	int				push_cost;
+	int				above_median;
+	int				cheapest;
+	struct s_stack	*target_node;
+	struct s_stack	*next;
+	//struct s_stack_node	*prev; //A pointer to the previous node
+}	t_stack;
 
 /* Operations */
 
-/* 
-sa (swap a): Troca os dois primeiros elementos no topo da pilha a.
-Se houver apenas um ou nenhum elemento na pilha, nada acontece.
+/* sa (swap a) | sb (swap b) | ss */
+void	swap(t_stack **stack_a, t_stack **stack_b, char task);
+/* pa (push a) | pb (push b) */
+void	push(t_stack **stack_a, t_stack **stack_b, char task);
+/* ra (rotate a) | rb (rotate b) | rr: */
+void	rotate(t_stack **stack_a, t_stack **stack_b, char task);
+/* rra (reverse rotate a) | rrb (reverse rotate b) | rrr */
+void	rrotate(t_stack **stack_a, t_stack **stack_b, char task);
 
-sb (swap b): Troca os dois primeiros elementos no topo da pilha b. 
-Se houver apenas um ou nenhum elemento na pilha, nada acontece.
+/* Stack manipulation */
 
-ss: Executa as operações sa e sb ao mesmo tempo, ou seja, troca os dois 
-primeiros elementos das pilhas a e b simultaneamente. 
-Se uma das pilhas tiver menos de dois elementos, nada acontece para aquela pilha.
-*/
+void	ft_stackadd_back(t_stack **lst, t_stack *new_);
+void	ft_stackadd_front(t_stack **lst, t_stack *new_);
+int		ft_stacksize(t_stack *lst);
+t_stack	*ft_stacknew(int number);
+t_stack	*ft_stacklast(t_stack *lst);
 
-void	swap(t_list **stack_a, t_list **stack_b, char task);
+/* Stack Factory */
 
-/* 
-pa (push a): Remove o primeiro elemento do topo da pilha b e o coloca no 
-topo da pilha a. Se a pilha b estiver vazia, nada acontece.
+t_stack	*build_stack(int *numbers, int size);
+void	set_cheapest(t_stack *stack);
+void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b);
+t_stack	*get_cheapest(t_stack *stack) ;
+void	prep_for_push(t_stack **stack, t_stack *top_node, char task);
 
-pb (push b): Remove o primeiro elemento do topo da pilha a e o coloca no 
-topo da pilha b. Se a pilha a estiver vazia, nada acontece.
-*/
+/* Stack Uptade */
 
-void	push(t_list **stack_a, t_list **stack_b, char task);
-
-/*
-ra (rotate a): Move todos os elementos da pilha a para cima em uma posição. 
-O primeiro elemento se torna o último.
-
-rb (rotate b): Move todos os elementos da pilha b para cima em uma posição. 
-O primeiro elemento se torna o último.
-
-rr: Executa as operações ra e rb ao mesmo tempo, ou seja, move os elementos 
-das pilhas a e b para cima em uma posição simultaneamente.
-O primeiro elemento de cada pilha se torna o último.
-*/
-
-void	rotate(t_list **stack_a, t_list **stack_b, char task);
-
-/*
-rra (reverse rotate a): Move todos os elementos da pilha a para baixo em 
-uma posição. O último elemento se torna o primeiro.
-
-rrb (reverse rotate b): Move todos os elementos da pilha b para baixo em
-uma posição. O último elemento se torna o primeiro.
-
-rrr: Executa as operações rra e rrb ao mesmo tempo, ou seja, move os
-elementos das pilhas a e b para baixo em uma posição simultaneamente. 
-O último elemento de cada pilha se torna o primeiro.
-*/
-void	rrotate(t_list **stack_a, t_list **stack_b, char task);
+void	stack_update(t_stack *stack_a, t_stack *stack_b, int task);
+void	current_index(t_stack *stack);
+void	target_a(t_stack *stack_a, t_stack *stack_b);
+void	target_b(t_stack *stack_a, t_stack *stack_b);
 
 /* Utils */
-long	ft_atol(const char *str);
-int		is_integer(char *str);
-int		is_duplicated(int *numbers, int size);
-int		is_sorted(int *numbers, int size);
 
-t_list	*build_stack(int *numbers, int size);
-void	print_stack(t_list *stack, char c);
-int		is_sorted_stack(t_list *stack);
-int		get_nbr(t_list *stack); //nao usada
-t_node	*get_node(t_list *stack);
+void	print_stack(t_stack *stack, char c);
+int		ft_stack_sorted(t_stack *stack);
+t_stack	*ft_stack_max(t_stack *stack);
+t_stack	*ft_stack_min(t_stack *stack);
 
-t_list	*lst_max(t_list *stack);
-t_list	*lst_min(t_list *stack);
-
-void	stack_update(t_list *stack_a, t_list *stack_b, int task);
-void	current_index(t_list *stack);
-void	target_a(t_list *stack_a, t_list *stack_b);
-void	target_b(t_list *stack_a, t_list *stack_b);
-void	set_cheapest(t_list *stack);
-void	cost_analysis_a(t_list *stack_a, t_list *stack_b);
-t_list	*get_cheapest(t_list *stack) ;
-void	prep_for_push(t_list **stack, t_list *top_node, char task);
+/* Free and Error*/
 
 void	ft_error_handler(int signal, int *numbers);
 void	ft_free_argv(char **argv);
 
-void	sort_small(t_list **stack_a, t_list **stack_b);
-void	sort_big(t_list **stack_a, t_list **stack_b);
+void	sort_small(t_stack **stack_a, t_stack **stack_b);
+void	sort_big(t_stack **stack_a, t_stack **stack_b);
 
-void	move_a_to_b(t_list **stack_a, t_list **stack_b);
-void	rev_rotate_both(t_list **stack_a, t_list **stack_b, t_list *cheapest_node);
-void	rotate_both(t_list **stack_a, t_list **stack_b, t_list *cheapest_node);
-void	move_b_to_a(t_list **stack_a, t_list **stack_b);
-void	min_on_top(t_list **stack_a);
+void	move_a_to_b(t_stack **stack_a, t_stack **stack_b);
+void	rev_rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest_node);
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest_node);
+void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
+void	min_on_top(t_stack **stack_a);
 
+/* Parser */
+
+int	*get_numbers(char **argv, int size);
+int	is_sorted(int *numbers, int size);
 
 #endif //PUSH_SWAP_H

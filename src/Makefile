@@ -13,10 +13,13 @@ LIBFT := libs/libft/libft.a
 LIBFT_DIR := libs/libft
 
 SRCS := src/push_swap.c\
-	src/utils.c\
 	src/free_error_handler.c\
 	src/deep_sort.c\
+	src/stack_utils.c\
 	src/stack_update.c\
+	src/stack_manipulation.c\
+	src/stack_factory.c\
+	src/parser.c\
 	src/main.c\
 
 # SRCS_BONUS := 
