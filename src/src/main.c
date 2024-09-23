@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/19 20:45:06 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:22:58 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	*get_numbers(char **argv, int size)
 	long	number;
 	int		*numbers;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	numbers = (int *) malloc(size * sizeof(int));
 	if (!numbers)
 		ft_error_handler(ERROR_MALLOC, numbers);
-	while (i <= size)
+	while (i < size)
 	{
 		if (is_integer(argv[i]) == -1)
 			ft_error_handler(ERROR_INTEGER, numbers);
@@ -48,23 +48,28 @@ static	void	manage_sort(t_list **stack_a, t_list **stack_b)
 	if (size == 2)
 		swap(stack_a, stack_b, 'a');
 	else if (size == 3)
-		smallsmall(stack_a);
+		sort_small(stack_a, stack_b);
 	else
-	 	quicksort_pilhas(stack_a, stack_b, size);
+		sort_big(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
 {
 	int		*numbers;
+	int		i;
 	t_list	*stack_a;
 	t_list	*stack_b;
 
-	if (argc <= 2)
+	i = 1;
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		ft_error_handler(ERROR_ARGS, NULL);
-	// if (argc == 2)
-	// 	argv = ft_split(argv[1], ' ');
-	// ft_printf("%s", argv[0]);
-	numbers = get_numbers(argv, argc - 1);
+	if (argc == 2)
+	{
+		i = 0;
+		argv = ft_split(argv[1], ' ');
+		argc = 4; //ft len split
+	}
+	numbers = get_numbers(argv + i, argc - 1);
 	if (is_sorted(numbers, argc - 1))
 		ft_error_handler(ERROR_SORTED, numbers);
 	stack_b = (t_list *) malloc(sizeof(t_list));
@@ -73,8 +78,6 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	stack_a = build_stack(numbers, argc - 1);
 	free(numbers);
-	print_stack(stack_a, 'A');
-	print_stack(stack_b, 'B');
 	manage_sort(&stack_a, &stack_b);
 	print_stack(stack_a, 'A');
 	print_stack(stack_b, 'B');

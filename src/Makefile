@@ -15,7 +15,8 @@ LIBFT_DIR := libs/libft
 SRCS := src/push_swap.c\
 	src/utils.c\
 	src/free_error_handler.c\
-	src/radix.c\
+	src/deep_sort.c\
+	src/stack_update.c\
 	src/main.c\
 
 # SRCS_BONUS := 

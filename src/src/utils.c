@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/19 19:49:51 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:09:51 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,69 +101,110 @@ int	is_sorted(int *numbers, int size)
 t_list	*build_stack(int *numbers, int size)
 {
 	t_list	*stack_a;
+	t_node	*node;
 	int		i;
-	int		*num_ptr;
 
 	i = 0;
 	stack_a = NULL;
 	while (i < size)
 	{
-		num_ptr = malloc(sizeof(int));
-		if (!num_ptr)
+		node = (t_node *) malloc(sizeof(t_node));
+		if (!node)
 		{
 			ft_lstclear(&stack_a, free);
 			ft_error_handler(ERROR_MALLOC, numbers);
 		}
-		*num_ptr = numbers[i];
-		ft_lstadd_back(&stack_a, ft_lstnew(num_ptr));
+		node->number = numbers[i];
+		node->index = 0;
+		node->above_median = 0;
+		node->cheapest= 0;
+		node->cost = 0;
+		node->target_node = NULL;
+		ft_lstadd_back(&stack_a, ft_lstnew(node));
 		i++;
 	}
 	return (stack_a);
 }
-
-/* t_list	*build_stack(int *numbers, int size)
-{
-	t_list	*stack_a;
-	int		i;
-	int		*num_ptr;
-
-	i = 0;
-	stack_a = NULL;
-	while (i < size)
-	{
-		num_ptr = malloc(2 * sizeof(int));
-		if (!num_ptr)
-		{
-			ft_lstclear(&stack_a, free);
-			ft_error_handler(ERROR_MALLOC, numbers);
-		}
-		num_ptr[0] = numbers[i];
-		num_ptr[1] = i;
-		ft_lstadd_back(&stack_a, ft_lstnew(num_ptr));
-		i++;
-	}
-	return (stack_a);
-} */
 
 void	print_stack(t_list *stack, char c)
 {
+	t_node *node;
+
 	ft_printf(" -- Stack %c -- \n", c);
+	if (!stack)
+		ft_printf("empty\n");
 	while (stack != NULL)
 	{
-		ft_printf("%d\n", *((int *) stack->content));
+		node = stack->content;
+		ft_printf("[%d] ", node->index);
+		ft_printf("%d \n", node->number);
+		// if (get_node(node->target_node))
+		// 	ft_printf("%d", get_node(node->target_node)->number);
 		stack = stack->next;
 	}
 }
 
-/* void	print_stack(t_list *stack, char c)
+int	is_sorted_stack(t_list *stack)
 {
-	int	*num_ptr;
-
-	ft_printf(" -- Stack %c -- \n", c);
-	while (stack != NULL)
+	if (!stack)
+		return (1);
+	while (stack->next)
 	{
-		num_ptr = (int *) stack->content;
-		ft_printf("[%d] -> %d\n", num_ptr[1], num_ptr[0]);
+		if (get_node(stack)->number > get_node(stack->next)->number)
+			return (-1);
 		stack = stack->next;
 	}
-} */
+	return (0);
+}
+
+int	get_nbr(t_list *stack)
+{
+	return (*((int *) stack->content));
+}
+
+t_node	*get_node(t_list *stack)
+{
+	return (((t_node *) stack->content));
+}
+
+t_list	*lst_max(t_list *stack)
+{
+	int		max;
+	t_list	*max_node;
+
+	if (!stack)
+		return (NULL);
+	max = get_node(stack)->number;
+	max_node = stack;
+	while (stack)
+	{
+		if (get_node(stack)->number > max)
+		{
+			max = get_node(stack)->number;
+			max_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (max_node);
+}
+
+t_list	*lst_min(t_list *stack)
+{
+	int		min;
+	t_list	*min_node;
+
+	if (!stack)
+		return (NULL);
+	min = get_node(stack)->number;
+	min_node = stack;
+	while (stack)
+	{
+		if (get_node(stack)->number < min)
+		{
+			min =  get_node(stack)->number;
+			min_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (min_node);
+}
