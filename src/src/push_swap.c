@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/23 23:36:47 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/24 23:32:39 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	push(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*head;
 
-	if (task == 'a' && stack_b && *stack_b && ft_stacksize(*stack_b) > 0)
+	if (task == 'a' && stack_b && *stack_b)
 	{
 		head = *stack_b;
 		*stack_b = (*stack_b)->next;
@@ -48,7 +48,7 @@ void	push(t_stack **stack_a, t_stack **stack_b, char task)
 		ft_stackadd_front(stack_a, head);
 		ft_printf("p%c\n", task);
 	}
-	if (task == 'b' && stack_a && *stack_a && ft_stacksize(*stack_a) > 0)
+	else if (task == 'b' && stack_a && *stack_a)
 	{
 		head = *stack_a;
 		*stack_a = (*stack_a)->next;
@@ -86,8 +86,7 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 	t_stack	*tail;
 	t_stack	*btail;
 
-	if ((task == 'a' || task == 'r') && *stack_a
-		&& ft_stacksize(*stack_a) > 0)
+	if ((task == 'a' || task == 'r') && *stack_a && (*stack_a)->next)
 	{
 		btail = *stack_a;
 		while (btail->next->next)
@@ -96,8 +95,7 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 		btail->next = NULL;
 		ft_stackadd_front(stack_a, tail);
 	}
-	if ((task == 'b' || task == 'r') && *stack_b
-		&& ft_stacksize(*stack_b) > 0)
+	if ((task == 'b' || task == 'r') && *stack_b && (*stack_b)->next)
 	{
 		btail = *stack_b;
 		while (btail->next->next)

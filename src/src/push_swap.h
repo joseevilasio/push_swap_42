@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/23 22:49:01 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/25 23:11:29 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_stack
 	int				cheapest;
 	struct s_stack	*target_node;
 	struct s_stack	*next;
-	//struct s_stack_node	*prev; //A pointer to the previous node
 }	t_stack;
 
 /* Operations */
@@ -63,9 +62,9 @@ t_stack	*ft_stacklast(t_stack *lst);
 /* Stack Factory */
 
 t_stack	*build_stack(int *numbers, int size);
+t_stack	*get_cheapest(t_stack *stack);
 void	set_cheapest(t_stack *stack);
-void	cost_analysis_a(t_stack *stack_a, t_stack *stack_b);
-t_stack	*get_cheapest(t_stack *stack) ;
+void	how_much(t_stack *stack_a, t_stack *stack_b);
 void	prep_for_push(t_stack **stack, t_stack *top_node, char task);
 
 /* Stack Uptade */
@@ -75,7 +74,7 @@ void	current_index(t_stack *stack);
 void	target_a(t_stack *stack_a, t_stack *stack_b);
 void	target_b(t_stack *stack_a, t_stack *stack_b);
 
-/* Utils */
+/* Stack Utils */
 
 void	print_stack(t_stack *stack, char c);
 int		ft_stack_sorted(t_stack *stack);
@@ -84,21 +83,29 @@ t_stack	*ft_stack_min(t_stack *stack);
 
 /* Free and Error*/
 
-void	ft_error_handler(int signal, int *numbers);
+void	ft_error_handler(int signal, int *numbers, char **strs, int argc);
 void	ft_free_argv(char **argv);
+void	ft_free_stack(t_stack *lst);
+
+/* Algothimi*/
 
 void	sort_small(t_stack **stack_a, t_stack **stack_b);
 void	sort_big(t_stack **stack_a, t_stack **stack_b);
 
+/* Algitmo Utils*/
+
 void	move_a_to_b(t_stack **stack_a, t_stack **stack_b);
-void	rev_rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest_node);
-void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest_node);
 void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
+void	rrotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest);
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest);
 void	min_on_top(t_stack **stack_a);
 
 /* Parser */
 
-int	*get_numbers(char **argv, int size);
-int	is_sorted(int *numbers, int size);
+int		is_sorted(int *numbers, int size);
+int		is_duplicated(int *numbers, int size);
+int		is_integer(char *str);
+int		ft_strslen(char **strs);
+long	ft_atol(const char *str);
 
 #endif //PUSH_SWAP_H

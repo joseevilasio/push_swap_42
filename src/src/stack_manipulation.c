@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:39:51 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/23 23:28:59 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/25 23:32:41 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_stackadd_back(t_stack **lst, t_stack *new_)
 {
 	t_stack	*start;
 
+	if (!new_)
+		return ;
 	if (*lst)
 	{
 		start = *lst;
@@ -25,11 +27,12 @@ void	ft_stackadd_back(t_stack **lst, t_stack *new_)
 	}
 	else
 		*lst = new_;
+	new_->next = NULL;
 }
 
 void	ft_stackadd_front(t_stack **lst, t_stack *new_)
 {
-	if (lst)
+	if (lst && new_)
 	{
 		new_->next = *lst;
 		*lst = new_;
@@ -44,11 +47,6 @@ t_stack	*ft_stacknew(int number)
 	if (new)
 	{
 		new->number = number;
-		new->above_median = 0;
-		new->cheapest = 0;
-		new->index = 0;
-		new->push_cost = 0;
-		new->target_node = NULL;
 		new->next = NULL;
 		return (new);
 	}
@@ -76,16 +74,11 @@ int	ft_stacksize(t_stack *lst)
 
 t_stack	*ft_stacklast(t_stack *lst)
 {
-	t_stack	*start;
-
-	if (lst && lst->next)
+	if (!lst)
+		return (NULL);
+	if (lst->next)
 	{
-		start = lst->next;
-		while (start->next)
-		{
-			start = start->next;
-		}
-		return (start);
+		lst = lst->next;
 	}
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:44:55 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/23 22:42:55 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/25 23:48:15 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,12 @@ void	stack_update(t_stack *stack_a, t_stack *stack_b, int task)
 	current_index(stack_b);
 	if (task == 'a')
 	{
-		ft_printf("running task a \n");
 		target_a(stack_a, stack_b);
-		cost_analysis_a(stack_a, stack_b);
+		how_much(stack_a, stack_b);
 		set_cheapest(stack_a);
 	}
 	if (task == 'b')
-	{		
-		ft_printf("running task b \n");
 		target_b(stack_a, stack_b);
-	}
 }
 
 void	current_index(t_stack *stack) 
@@ -41,7 +37,7 @@ void	current_index(t_stack *stack)
 		return;
 	while (stack)
 	{
-		 stack->index = i;
+		stack->index = i;
 		if (i <= median)
 			stack->above_median = 1;
 		else
@@ -63,10 +59,9 @@ void	target_a(t_stack *stack_a, t_stack *stack_b)
 		curr_b = stack_b;
 		while (curr_b)
 		{
-			if ((curr_b)->number < (stack_a)->number
-				&& (curr_b)->number > match)
+			if (curr_b->number < stack_a->number && curr_b->number > match)
 			{
-				match = (curr_b)->number;
+				match = curr_b->number;
 				target_node = curr_b;
 			}
 			curr_b = curr_b->next;
@@ -100,9 +95,9 @@ void	target_b(t_stack *stack_a, t_stack *stack_b)
 			curr_a = curr_a->next;
 		}
 		if (match == LONG_MAX)
-			 stack_b->target_node = ft_stack_min(stack_a);
+			stack_b->target_node = ft_stack_min(stack_a);
 		else
-			 stack_b->target_node = target_node;
+			stack_b->target_node = target_node;
 		stack_b = stack_b->next;
 	}
 }
