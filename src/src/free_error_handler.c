@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 22:48:32 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 22:58:37 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:35:54 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_error_handler(int signal, int *numbers, char **strs, int argc)
 {
 	if (signal >= 200 && signal < 300)
-		ft_printf("Error\n");
+		write(2, "Error\n", 7);
 	if (numbers)
 		free(numbers);
 	if (strs && argc == 2)
@@ -36,18 +36,17 @@ void	ft_free_argv(char **argv)
 	free(argv);
 }
 
-void	ft_free_stack(t_stack *lst)
+void	ft_free_stack(t_stack **stack)
 {
-	t_stack	*temp;
+	t_stack	*current;
+	t_stack	*next;
 
-	if (lst)
+	current = *stack;
+	while (current)
 	{
-		while (lst)
-		{
-			temp = lst->next;
-			free(lst); 
-			lst = temp;
-		}
-		lst = NULL;
+		next = current->next;
+		free(current);
+		current = next;
 	}
+	*stack = NULL;
 }

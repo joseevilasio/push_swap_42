@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/27 20:26:58 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:48:54 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	swap(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*first;
 	t_stack	*second;
-	int 	i;
+	int		i;
 
 	i = 0;
 	if (ft_stacksize(*stack_a) > 1 && (task == 'a' || task == 's'))
@@ -93,8 +93,9 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*tail;
 	t_stack	*btail;
-	int i = 0;
+	int		i;
 
+	i = 0;
 	if ((task == 'a' || task == 'r') && *stack_a && (*stack_a)->next)
 	{
 		btail = *stack_a;

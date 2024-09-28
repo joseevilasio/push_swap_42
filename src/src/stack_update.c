@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 17:44:55 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 23:48:15 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:42:41 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	stack_update(t_stack *stack_a, t_stack *stack_b, int task)
 		target_b(stack_a, stack_b);
 }
 
-void	current_index(t_stack *stack) 
+void	current_index(t_stack *stack)
 {
 	int		i;
 	int		median;
@@ -34,7 +34,7 @@ void	current_index(t_stack *stack)
 	i = 0;
 	median = ft_stacksize(stack) / 2;
 	if (!stack)
-		return;
+		return ;
 	while (stack)
 	{
 		stack->index = i;

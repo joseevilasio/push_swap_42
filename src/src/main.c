@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 11:11:13 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:40:39 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,10 @@ int	main(int argc, char **argv)
 		ft_free_argv(argv);
 	if (is_sorted(numbers, size))
 		ft_error_handler(ERROR_SORTED, numbers, NULL, argc);
-	stack_b = (t_stack *) malloc(sizeof(t_stack));
-	if (!stack_b)
-		ft_error_handler(ERROR_MALLOC, numbers, NULL, argc);
-	stack_b = NULL;
 	stack_a = build_stack(numbers, size);
+	stack_b = NULL;
 	manage_sort(&stack_a, &stack_b);
-	//print_stack(stack_a, 'A');
-	free(stack_b); //resolver
+	ft_free_stack(&stack_a);
+	ft_free_stack(&stack_b);
 	return (SUCCESS);
 }

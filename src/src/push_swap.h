@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 23:11:29 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:30:55 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define SUCCESS 0
 /* Internal process failure range 100 */
 # define ERROR_MALLOC 101
-/* External process failure range 200 | ft_printf() */
+/* External process failure range 200 | write stderr */
 # define ERROR_INTEGER 201
 # define ERROR_MAXINT 202
 # define ERROR_DUPLICATED 203
@@ -85,7 +85,7 @@ t_stack	*ft_stack_min(t_stack *stack);
 
 void	ft_error_handler(int signal, int *numbers, char **strs, int argc);
 void	ft_free_argv(char **argv);
-void	ft_free_stack(t_stack *lst);
+void	ft_free_stack(t_stack **lst);
 
 /* Algothimi*/
 

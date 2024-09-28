@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:03:59 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 11:08:59 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:46:31 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_stack_sorted(t_stack *stack)
 t_stack	*ft_stack_max(t_stack *stack)
 {
 	long		max;
-	t_stack	*max_node;
+	t_stack		*max_node;
 
 	if (!stack)
 		return (NULL);
@@ -61,7 +61,7 @@ t_stack	*ft_stack_max(t_stack *stack)
 t_stack	*ft_stack_min(t_stack *stack)
 {
 	long		min;
-	t_stack	*min_node;
+	t_stack		*min_node;
 
 	if (!stack)
 		return (NULL);
