@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/24 23:32:39 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:26:58 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	swap(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*first;
 	t_stack	*second;
+	int 	i;
 
+	i = 0;
 	if (ft_stacksize(*stack_a) > 1 && (task == 'a' || task == 's'))
 	{
 		first = *stack_a;
@@ -24,6 +26,7 @@ void	swap(t_stack **stack_a, t_stack **stack_b, char task)
 		first->next = second->next;
 		second->next = first;
 		*stack_a = second;
+		i++;
 	}
 	if (ft_stacksize(*stack_b) > 1 && (task == 'b' || task == 's'))
 	{
@@ -32,8 +35,10 @@ void	swap(t_stack **stack_a, t_stack **stack_b, char task)
 		first->next = second->next;
 		second->next = first;
 		*stack_b = second;
+		i++;
 	}
-	ft_printf("s%c\n", task);
+	if (i > 0)
+		ft_printf("s%c\n", task);
 }
 
 void	push(t_stack **stack_a, t_stack **stack_b, char task)
@@ -61,30 +66,34 @@ void	push(t_stack **stack_a, t_stack **stack_b, char task)
 void	rotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*head;
+	int		i;
 
-	if ((task == 'a' || task == 'r') && stack_a && *stack_a
-		&& ft_stacksize(*stack_a) > 0 && (*stack_a)->next)
+	i = 0;
+	if ((task == 'a' || task == 'r') && *stack_a && (*stack_a)->next)
 	{
 		head = *stack_a;
 		*stack_a = (*stack_a)->next;
 		head->next = NULL;
 		ft_stackadd_back(stack_a, head);
+		i++;
 	}
-	if ((task == 'b' || task == 'r') && stack_b && *stack_b
-		&& ft_stacksize(*stack_b) > 0 && (*stack_b)->next)
+	if ((task == 'b' || task == 'r') && *stack_b && (*stack_b)->next)
 	{
 		head = *stack_b;
 		*stack_b = (*stack_b)->next;
 		head->next = NULL;
 		ft_stackadd_back(stack_b, head);
+		i++;
 	}
-	ft_printf("r%c\n", task);
+	if (i > 0)
+		ft_printf("r%c\n", task);
 }
 
 void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*tail;
 	t_stack	*btail;
+	int i = 0;
 
 	if ((task == 'a' || task == 'r') && *stack_a && (*stack_a)->next)
 	{
@@ -94,6 +103,7 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 		tail = btail->next;
 		btail->next = NULL;
 		ft_stackadd_front(stack_a, tail);
+		i++;
 	}
 	if ((task == 'b' || task == 'r') && *stack_b && (*stack_b)->next)
 	{
@@ -103,6 +113,8 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 		tail = btail->next;
 		btail->next = NULL;
 		ft_stackadd_front(stack_b, tail);
+		i++;
 	}
-	ft_printf("rr%c\n", task);
+	if (i > 0)
+		ft_printf("rr%c\n", task);
 }

@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:41:35 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 23:31:30 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 11:10:09 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	sort_small(t_stack **stack_a, t_stack **stack_b)
 void	sort_big(t_stack **stack_a, t_stack **stack_b)
 {
 	int	size;
+	//int x = 0;
 
+	//print_stack(*stack_a, 'A');
 	size = ft_stacksize(*stack_a);
 	if (size-- > 3 && ft_stack_sorted(*stack_a) == -1)
 		push(stack_a, stack_b, 'b');
@@ -50,8 +52,13 @@ void	sort_big(t_stack **stack_a, t_stack **stack_b)
 		push(stack_a, stack_b, 'b');
  	while (size-- > 3 && ft_stack_sorted(*stack_a) == -1)
 	{
+		//x++;
 		stack_update(*stack_a, *stack_b, 'a');
+		//printf("Stack A\n [-- %d--] [%d] Number: %d|\nCost: %d|\nMedian: %d|\nCheapest: %d|\nNumber-Target: %d|\n",
+		//x,(*stack_a)->index, (*stack_a)->number, (*stack_a)->push_cost, (*stack_a)->above_median, (*stack_a)->cheapest, (*stack_a)->target_node->number);
 		move_a_to_b(stack_a, stack_b); //Move the cheapest `a` nodes into a sorted stack `b`, until three nodes are left in stack `a`
+		//if (x == 15)
+		//	exit(1);
 	}
 	sort_small(stack_a, stack_b);
 	while (*stack_b)

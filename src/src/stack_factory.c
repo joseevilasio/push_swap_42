@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:32:17 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 23:11:29 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 11:12:04 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ void	how_much(t_stack *stack_a, t_stack *stack_b) //Define a functio that analys
 
 	size_a = ft_stacksize(stack_a);
 	size_b = ft_stacksize(stack_b);
+	//printf("Size a:%d Size b:%d \n", size_a, size_b);
 	while (stack_a) //Loop through each node until the end of the stack is reached
 	{
 		stack_a->push_cost = stack_a->index; //Assign the current `a` node's push cost, its' index value
 		if (!stack_a->above_median) //Check if the above_median data is false, meaning it is below median
 			stack_a->push_cost = size_a - stack_a->index; //If so, update `a` node's push cost to the stack's sizegth - index
-		if (!stack_a->target_node->above_median) //Check if `a` node's target node `b` has a "true" above median attribute, meaning the target `b` node is above median
+		if (stack_a->target_node->above_median) //Check if `a` node's target node `b` has a "true" above median attribute, meaning the target `b` node is above median
 			stack_a->push_cost += stack_a->target_node->index; //If so, update `a` node's push cost, the sum of (its current index) + (its target `b` node's index)
 		else //If `a` node is indeed above median and its target `b` node is below median
 			stack_a->push_cost += size_b - stack_a->target_node->index; //Update `a` node's push cost, the sum of (its current index) + (`b` stack's sizegth - its target `b` node's index)

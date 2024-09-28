@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/25 22:58:29 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/28 11:11:13 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	stack_a = build_stack(numbers, size);
 	manage_sort(&stack_a, &stack_b);
-	ft_free_stack(stack_a);
+	//print_stack(stack_a, 'A');
 	free(stack_b); //resolver
 	return (SUCCESS);
 }
