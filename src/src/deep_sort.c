@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:41:35 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 21:45:08 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:31:18 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,27 @@ void	move_a_to_b(t_stack **stack_a, t_stack **stack_b)
 
 	cheapest = get_cheapest(*stack_a);
 	if (cheapest->above_median && cheapest->target_node->above_median)
-		rotate_both(stack_a, stack_b, cheapest);
+	{
+		while (*stack_b != cheapest->target_node && *stack_a != cheapest)
+			rotate(stack_a, stack_b, 'r');
+		current_index(*stack_a);
+		current_index(*stack_b);
+	}
 	else if (!cheapest->above_median && !cheapest->target_node->above_median)
-		rrotate_both(stack_a, stack_b, cheapest);
-	prep_for_push(stack_a, cheapest, 'a');
-	prep_for_push(stack_b, cheapest->target_node, 'b');
+	{
+		while (*stack_b != cheapest->target_node && *stack_a != cheapest)
+			rrotate(stack_a, stack_b, 'r');
+		current_index(*stack_a);
+		current_index(*stack_b);
+	}
+	reordering(stack_a, cheapest, 'a');
+	reordering(stack_b, cheapest->target_node, 'b');
 	push(stack_a, stack_b, 'b');
 }
 
 void	move_b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
-	prep_for_push(stack_a, (*stack_b)->target_node, 'a');
+	reordering(stack_a, (*stack_b)->target_node, 'a');
 	push(stack_a, stack_b, 'a');
 }
 
@@ -92,21 +102,4 @@ void	min_on_top(t_stack **stack_a)
 		else
 			rrotate(stack_a, NULL, 'a');
 	}
-}
-
-void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest)
-{
-	while (*stack_b != cheapest->target_node
-		&& *stack_a != cheapest)
-		rotate(stack_a, stack_b, 'r');
-	current_index(*stack_a);
-	current_index(*stack_b);
-}
-
-void	rrotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest)
-{
-	while (*stack_b != cheapest->target_node && *stack_a != cheapest)
-		rrotate(stack_a, stack_b, 'r');
-	current_index(*stack_a);
-	current_index(*stack_b);
 }

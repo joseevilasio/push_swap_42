@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 21:48:54 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:14:39 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,19 @@ void	rotate(t_stack **stack_a, t_stack **stack_b, char task)
 		ft_printf("r%c\n", task);
 }
 
+static void	rrotate_b(t_stack **stack_b)
+{
+	t_stack	*tail;
+	t_stack	*btail;
+
+	btail = *stack_b;
+	while (btail->next->next)
+		btail = btail->next;
+	tail = btail->next;
+	btail->next = NULL;
+	ft_stackadd_front(stack_b, tail);
+}
+
 void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 {
 	t_stack	*tail;
@@ -108,12 +121,7 @@ void	rrotate(t_stack **stack_a, t_stack **stack_b, char task)
 	}
 	if ((task == 'b' || task == 'r') && *stack_b && (*stack_b)->next)
 	{
-		btail = *stack_b;
-		while (btail->next->next)
-			btail = btail->next;
-		tail = btail->next;
-		btail->next = NULL;
-		ft_stackadd_front(stack_b, tail);
+		rrotate_b(stack_b);
 		i++;
 	}
 	if (i > 0)

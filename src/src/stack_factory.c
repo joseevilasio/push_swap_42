@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:32:17 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 21:46:03 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:31:18 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_stack	*get_cheapest(t_stack *stack)
 	return (NULL);
 }
 
-void	prep_for_push(t_stack **stack, t_stack *top_node, char task)
+void	reordering(t_stack **stack, t_stack *top_node, char task)
 {
 	while (*stack != top_node)
 	{

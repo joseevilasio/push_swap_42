@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 21:30:55 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:31:18 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_stack	*build_stack(int *numbers, int size);
 t_stack	*get_cheapest(t_stack *stack);
 void	set_cheapest(t_stack *stack);
 void	how_much(t_stack *stack_a, t_stack *stack_b);
-void	prep_for_push(t_stack **stack, t_stack *top_node, char task);
+void	reordering(t_stack **stack, t_stack *top_node, char task);
 
 /* Stack Uptade */
 
