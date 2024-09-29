@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:39:51 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/27 21:43:10 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 18:29:07 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_stack	*ft_stacknew(int number)
 		new->next = NULL;
 		new->index = 0;
 		new->push_cost = 0;
+		new->cheapest = 0;
 		return (new);
 	}
 	return (NULL);

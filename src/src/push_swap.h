@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/29 15:31:18 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:29:17 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,12 @@ void	ft_error_handler(int signal, int *numbers, char **strs, int argc);
 void	ft_free_argv(char **argv);
 void	ft_free_stack(t_stack **lst);
 
-/* Algothimi*/
+/* Algorithm */
 
 void	sort_small(t_stack **stack_a, t_stack **stack_b);
 void	sort_big(t_stack **stack_a, t_stack **stack_b);
-
-/* Algitmo Utils*/
-
 void	move_a_to_b(t_stack **stack_a, t_stack **stack_b);
 void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
-void	rrotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest);
-void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_stack *cheapest);
 void	min_on_top(t_stack **stack_a);
 
 /* Parser */
