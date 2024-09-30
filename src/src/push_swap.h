@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:38:36 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/29 17:29:17 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:25:56 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	sort_small(t_stack **stack_a, t_stack **stack_b);
 void	sort_big(t_stack **stack_a, t_stack **stack_b);
 void	move_a_to_b(t_stack **stack_a, t_stack **stack_b);
 void	move_b_to_a(t_stack **stack_a, t_stack **stack_b);
-void	min_on_top(t_stack **stack_a);
+void	push_min(t_stack **stack_a);
 
 /* Parser */
 

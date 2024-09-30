@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/28 21:40:39 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:57:56 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	**manage_args(int argc, char **argv)
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
-		if (!argv[1])
+		if (!argv)
 			ft_error_handler(ERROR_ARGS, NULL, argv, argc);
 		return (argv);
 	}
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (argc == 1 /* || (argc == 2 && !argv[1][0]) */)
 		return (ERROR_ARGS);
 	argv = manage_args(argc, argv);
 	size = ft_strslen(argv);

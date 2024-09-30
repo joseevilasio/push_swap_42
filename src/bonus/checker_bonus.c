@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 15:42:56 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/29 20:01:09 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/30 20:03:38 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	**manage_args(int argc, char **argv)
 	if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
-		if (!argv[1])
+		if (!argv)
 			ft_error_handler(ERROR_ARGS, NULL, argv, argc);
 		return (argv);
 	}

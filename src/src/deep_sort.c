@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 20:41:35 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/29 15:44:01 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:25:56 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	sort_big(t_stack **stack_a, t_stack **stack_b)
 		move_b_to_a(stack_a, stack_b);
 	}
 	current_index(*stack_a);
-	min_on_top(stack_a);
+	push_min(stack_a);
 }
 
 void	move_a_to_b(t_stack **stack_a, t_stack **stack_b)
@@ -93,7 +93,7 @@ void	move_b_to_a(t_stack **stack_a, t_stack **stack_b)
 	push(stack_a, stack_b, 'a');
 }
 
-void	min_on_top(t_stack **stack_a)
+void	push_min(t_stack **stack_a)
 {
 	while ((*stack_a)->number != ft_stack_min(*stack_a)->number)
 	{
