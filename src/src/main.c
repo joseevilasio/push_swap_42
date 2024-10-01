@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:20:42 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/30 19:57:56 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:48:14 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	if (argc == 1 /* || (argc == 2 && !argv[1][0]) */)
+	if (argc == 1)
 		return (ERROR_ARGS);
 	argv = manage_args(argc, argv);
 	size = ft_strslen(argv);

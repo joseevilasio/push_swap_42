@@ -6,7 +6,7 @@
 /*   By: joneves- <joneves-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:32:17 by joneves-          #+#    #+#             */
-/*   Updated: 2024/09/29 15:31:18 by joneves-         ###   ########.fr       */
+/*   Updated: 2024/10/01 23:12:44 by joneves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	how_much(t_stack *stack_a, t_stack *stack_b)
 	while (stack_a)
 	{
 		stack_a->push_cost = stack_a->index;
-		if (!stack_a->above_median)
+		if (stack_a->above_median == 0)
 			stack_a->push_cost = size_a - stack_a->index;
-		if (stack_a->target_node->above_median)
+		if (stack_a->target_node->above_median == 1)
 			stack_a->push_cost += stack_a->target_node->index;
 		else
 			stack_a->push_cost += size_b - stack_a->target_node->index;
@@ -51,7 +51,7 @@ void	how_much(t_stack *stack_a, t_stack *stack_b)
 void	set_cheapest(t_stack *stack)
 {
 	long	cheapest_value;
-	t_stack	*cheapest;
+	t_stack	*cheapest_node;
 
 	if (!stack)
 		return ;
@@ -61,11 +61,11 @@ void	set_cheapest(t_stack *stack)
 		if (stack->push_cost < cheapest_value)
 		{
 			cheapest_value = stack->push_cost;
-			cheapest = stack;
+			cheapest_node = stack;
 		}
 		stack = stack->next;
 	}
-	cheapest->cheapest = 1;
+	cheapest_node->cheapest = 1;
 }
 
 t_stack	*get_cheapest(t_stack *stack)
